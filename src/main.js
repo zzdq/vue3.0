@@ -4,7 +4,8 @@ import router from './router'
 import ElementPlus from 'element-plus'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
-// import '@/styles/index.scss' // global css
+import 'element-plus/lib/theme-chalk/index.css'
+import '@/styles/index.scss' // global css
 
 
 const app = createApp(App)

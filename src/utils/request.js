@@ -1,10 +1,12 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
-import store from '@/store'
+import { ElMessage } from 'element-plus'
+// 接口配置
+import config from '/config'
+// import store from '@/store'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // api 的 base_url
+  baseURL: config[import.meta.env.MODE].baseUrl, // api 的 base_url
   withCredentials: true, // 跨域请求时发送 cookies
   timeout: 60000 // request timeout
 })
@@ -13,10 +15,10 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // Do something before request is sent
-    if (store.state.user.token) {
-      // 让每个请求携带token-- ['Authorization']为自定义key 请根据实际情况自行修改
-      config.headers['Authorization'] = 'Bearer ' + store.state.user.token
-    }
+    // if (store.state.user.token) {
+    //   // 让每个请求携带token-- ['Authorization']为自定义key 请根据实际情况自行修改
+    //   config.headers['Authorization'] = 'Bearer ' + store.state.user.token
+    // }
     return config
   },
   error => {
@@ -48,7 +50,7 @@ service.interceptors.response.use(
         // 什么也不做直接返回
       } else if (res.code === 1 && (res.msg === '请重新登录！' || res.msg === '')) {
         // 登录失效，重定向到登录页
-        Message({
+        ElMessage({
           message: res.msg,
           type: 'error',
           duration: 1 * 1000
@@ -60,14 +62,14 @@ service.interceptors.response.use(
         // }, 1000)
       } else {
         // 返回其他的状态需要提示
-        Message({
+        ElMessage({
           message: res.msg || 'warning',
           type: 'warning',
           duration: 5 * 1000
         })
         // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
         if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-          Message({
+          ElMessage({
             message: `你已被登出，可以取消继续留在该页面，或者重新登录`,
             type: 'error',
             duration: 1 * 1000
@@ -98,7 +100,7 @@ service.interceptors.response.use(
     if (!navigator.onLine) {
       netWork = '无网络'
     }
-    Message({
+    ElMessage({
       message: netWork || error.msg || '接口请求错误！',
       type: 'error',
       duration: 5 * 1000

@@ -1,0 +1,42 @@
+@mixin wh($w, $h) {
+  width: #{$w};
+  height: #{$h};
+}
+
+@mixin fullwh() {
+  @include wh(100%,100%);
+}
+
+@mixin fullscreen() {
+  @include wh(100%, 100%);
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+@mixin shadow-bg() {
+  box-shadow: 0 0 3.5em .3em rgba(10, 10, 10, 0.1);
+}
+
+@mixin flex-center-h() {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-center-v() {
+  @include flex-center-h();
+  flex-direction: column;
+}
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin bg-image($imgurl) {
+  background: url($imgurl) no-repeat;
+  background-size: 100% 100%;
+  background-position: 0 0;
+}
+

@@ -1,0 +1,59 @@
+@import '../../../common/scss/base.scss';
+
+#captcha-wrapper {
+    .wait {
+        color: #aaa;
+    }
+}
+
+.login-container {
+    @include wh(100%, 100%);
+    @include flex-center();
+    background: #1987bc;
+
+    .el-form {
+        @include wh(19.5rem, auto);
+        background: #fff;
+        @include flex-center-v();
+        margin: 2rem 0;
+        box-shadow: 0px 0px 8px #aaa;
+
+        .login-title {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #2f2f39;
+            letter-spacing: 0.2rem;
+        }
+
+        .el-form-item {
+            padding: 0 2rem;
+        }
+
+        .captcha-form-item-content {
+            @include flex-center-h();
+        }
+
+        .captcha-input {
+            margin-right: 20px;
+        }
+
+        #captcha {
+            width: 100px;
+            height: 40px;
+            min-width: 100px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .submit-wrapper {
+            padding: 0.5rem 2rem 3rem;
+        }
+
+        .btn-login {
+            background-color: #35A3C1;
+        }
+    }
+}

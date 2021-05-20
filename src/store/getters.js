@@ -15,6 +15,7 @@ const getters = {
   // makeCalling: state => state.user.makeCalling, // 是否拨打电话中
   // loginInfo: state => state.user.loginInfo, // 用户登录的账号名
   // udid: state => state.user.udid,
+  token: state => state.user.token,
   // sidebar: state => state.app.sidebar,
   // language: state => state.app.language, // 语言
   // size: state => state.app.size,

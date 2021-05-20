@@ -1,0 +1,32 @@
+
+@import '../../../common/scss/base.scss';
+
+.container {
+  @include wh(100%, 100%);
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  .menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    @include wh(15%, 100%);
+    background: #4c535a;
+
+    .el-menu {
+      border-right: 0;
+
+      .el-menu-item {
+        text-align: center;
+        padding-right: 3.5rem;
+      }
+    }
+  }
+
+  .main {
+    @include wh(85%, 100%);
+    position: absolute;
+    left: 15%;
+    top: 0;
+  }
+}

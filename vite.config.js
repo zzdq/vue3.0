@@ -22,19 +22,27 @@ export default defineConfig({
       }]
     })
   ],
+  publicDir: 'public', // 静态资源
   resolve: {
     alias: {
       '~': path.resolve(__dirname, './'),
       '@': path.resolve(__dirname, 'src')
     }
   },
-  // server: {
-  //   proxy: {
-  //     '/': {
-  //       target: 'http://backend-api-02.newbee.ltd/manage-api/v1',
-  //       changeOrigin: true,
-  //       rewrite: path => path.replace('^/', '')
-  //     }
-  //   }
-  // }
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://web.deerttgx.com',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
+  },
+  css:{
+    preprocessorOptions: {
+      scss: {
+        additionalData: ``//引用公共样式，使用vite搭建项目只安装sass即可，不需要安装node-sass,sass-loader
+      }
+    }
+  }
 })
