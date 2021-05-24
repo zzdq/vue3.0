@@ -43,25 +43,6 @@
           size="medium"
         />
       </el-form-item>
-      <el-form-item
-        label
-        prop="captcha"
-      >
-        <div class="captcha-form-item-content">
-          <el-input
-            v-model.trim="authLoginForm.captcha"
-            type="text"
-            class="captcha-input"
-            placeholder="验证码"
-            required
-            size="medium"
-          />
-          <div
-            id="authLoginDivCaptcha"
-            style="height: 36px;"
-          />
-        </div>
-      </el-form-item>
       <div class="submit-wrapper">
         <button
           class="btn-fw btn-login"
@@ -78,12 +59,18 @@
 
 <script>
 // 接口
-import { loginAuto, getConfig } from '@/api/login'
-import { reactive, ref, toRefs, onMounted } from 'vue'
+import { getConfig } from '@/api/login'
+import { reactive, ref, toRefs, onMounted, computed } from 'vue'
+import { useStore } from 'vuex' // 仓库
+import { guid } from '@/utils'
+import SHARETED_COMMON_MD5 from '@/common/js/shareted/common/md5'
+import PROJECT_COMMON from '@/common/js/project/common'
 
 export default {
   name: 'loginPage',
   setup() {
+    // 仓库
+    const store = useStore()
     // ref指向
     const loginForm = ref(null)
     // 原始状态
@@ -96,7 +83,6 @@ export default {
       authLoginForm: {
         username: '', // 用户名
         password: '', // 密码
-        captcha: '', // 验证码
       },
       authLoginRules: {
         username: [
@@ -105,11 +91,9 @@ export default {
         password: [
           { required: true, message: '密码不能为空', trigger: 'blur' }
         ],
-        captcha: [
-          { required: true, message: '验证码不能为空', trigger: 'blur' }
-        ],
       }
     })
+    // dom挂载
     onMounted(() => {
       getConfigData()
     })
@@ -125,15 +109,28 @@ export default {
     const authLoginSubmit = () => {
       loginForm.value.validate(async(valid) => {
         if (valid) {
-          const res = await loginAuto()
-          console.log(res)
+          const data = {
+            act: 'ma_login',
+            user_name: state.authLoginForm.username,
+            pws: SHARETED_COMMON_MD5.hex_md5(
+              PROJECT_COMMON.project_password_front_code +
+                state.authLoginForm.password.trim()
+            ),
+            udid: guid(),
+            type: 1 // 登录页登录标识
+          }
+          // 调用登录方法
+          const res = await store.dispatch('user/loginCaps', data)
+          if (res.code === 0) {
+            
+          }
         }
       })
     }
     return {
       ...toRefs(state),
       loginForm,
-      authLoginSubmit
+      authLoginSubmit,
     }
   }
 }

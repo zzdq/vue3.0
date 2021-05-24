@@ -254,6 +254,6 @@ function binl2b64(binarray) {
   return str
 }
 
-module.exports = {
+export default {
   hex_md5
 }

@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import getters from './getters'
 
-Vue.use(Vuex)
+// vite版自动导入vuex
+// 这次我将需要导入的文件放到store/modules文件夹下面了
+//  import.meta.globEager的参数必须是绝对路径或者相对路径，不能是路径别名。也就是以点和斜杠开头的字符串。
+let modules = {}
+const modulesFiles = import.meta.globEager('./modules/*.js')
+// 
+for (const path in modulesFiles) {
+  const moduleName = path.replace(/(.*\/)*([^.]+).*/gi, '$2')
+  modules = {...modules, [moduleName]:modulesFiles[path].default}
+}
 
-const modulesFiles = require.context('./modules', false, /\.js$/)
-
-const modules = modulesFiles.keys().reduce((modules, modulePath) => {
-  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-  const value = modulesFiles(modulePath)
-  modules[moduleName] = value.default
-  return modules
-}, {})
-
-const store = new Vuex.Store({
+const store = createStore({
   modules,
-  getters
+  getters,
+  // plugins: [new VuexPersistence().plugin]
 })
 
 export default store

@@ -759,6 +759,11 @@ vuex@^4.0.0:
   resolved "https://registry.nlark.com/vuex/download/vuex-4.0.0.tgz#ac877aa76a9c45368c979471e461b520d38e6cf5"
   integrity sha1-rId6p2qcRTaMl5Rx5GG1INOObPU=
 
+websocket-heartbeat-js@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.npm.taobao.org/websocket-heartbeat-js/download/websocket-heartbeat-js-1.0.13.tgz#0393f0e25f5614f98232748970d518e9e3bc0704"
+  integrity sha1-A5Pw4l9WFPmCMnSJcNUY6eO8BwQ=
+
 yallist@^3.0.2:
   version "3.1.1"
   resolved "https://registry.npm.taobao.org/yallist/download/yallist-3.1.1.tgz#dbb7daf9bfd8bac9ab45ebf602b8cbad0d5d08fd"

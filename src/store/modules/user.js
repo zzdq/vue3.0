@@ -1,5 +1,3 @@
-// import store from '@/store'
-// import router from '@/router'
 
 const state = {
   token: ''
@@ -10,12 +8,19 @@ const mutations = {
     if (state.hasOwnProperty(key)) {
       state[key] = value
     }
-  },
+  }
 }
 
 const actions = {
   changeSetting({ commit }, data) {
     commit('CHANGE_SETTING', data)
+  },
+  loginCaps({ dispatch, commit }, agentData) {
+    // 解构赋值
+    const { act, user_name, pwd, udid, type } = agentData
+    return new Promise(async(resolve, reject) => {
+      
+    })
   }
 }
 

@@ -4,7 +4,7 @@ var project_domain = 'web.brainbank.vip'
 var project_password_front_code = 'walleteft-'
 var project_oss_domain = 'oss.brainbank.vip'
 
-module.exports = {
+export default {
   project_name,
   project_path_root,
   project_domain,
