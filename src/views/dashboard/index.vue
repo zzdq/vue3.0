@@ -1,45 +1,77 @@
 <template>
-  <el-container>
-    <el-header>Header</el-header>
-    <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-main>Main</el-main>
-    </el-container>
+  <topBar :count="object.obj" />
+  <el-container class="el-content">
+    <el-aside width="200px">{{ object.obj }}</el-aside>
+    <el-main>{{ plusOne }}</el-main>
   </el-container>
 </template>
 
-<style>
-  .el-header, .el-footer {
-    background-color: #B3C0D1;
-    color: #333;
-    text-align: center;
-    line-height: 60px;
-  }
+<script>
+// getCurrentInstance 获取当前实例
+import { getCurrentInstance, ref, reactive, onMounted, computed } from 'vue'
+import topBar from '@/components/topBar.vue'
 
-  .el-aside {
-    background-color: #D3DCE6;
-    color: #333;
-    text-align: center;
-    line-height: 200px;
-  }
+export default {
+  components: {
+    topBar
+  },
+  setup () {
+    let count = ref(0)
+    const object = reactive({ obj: 1 })
 
-  .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
-  }
+    const plusOne = computed(() => object.obj + +Math.random().toFixed(1))
 
-  body > .el-container {
-    margin-bottom: 40px;
+    const { proxy, ctx } = getCurrentInstance()
+    console.log(proxy, ctx);
+    onMounted(() => {
+      setInterval(() => {
+        object.obj++
+      }, 1000);
+    })
+    return {
+      count,
+      object,
+      plusOne
+    }
   }
+}
+</script>
 
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
+<style scoped>
+.el-content {
+  height: calc(100% - 60px);
+}
+.el-footer {
+  background-color: #b3c0d1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
 
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
-  }
+.el-aside {
+  background-color: #d3dce6;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
+
+.el-main {
+  background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+  line-height: 160px;
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+}
 </style>

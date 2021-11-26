@@ -50,9 +50,6 @@
           v-text="'登 录'"
         />
       </div>
-      <div>
-        <div style="color: #606266;font-size: 12px;text-align: center;margin-bottom: 20px;">{{ configData.index_button ? configData.index_button : 'Copyright © 2020 福建省德尔智创集团有限公司' }}</div>
-      </div>
     </el-form>
   </div>
 </template>
@@ -68,7 +65,7 @@ import PROJECT_COMMON from '@/common/js/project/common'
 
 export default {
   name: 'loginPage',
-  setup() {
+  setup () {
     // 仓库
     const store = useStore()
     // ref指向
@@ -98,7 +95,7 @@ export default {
       getConfigData()
     })
     // 获取配置
-    const getConfigData = async() => {
+    const getConfigData = async () => {
       const res = await getConfig()
       if (res.code === 0) {
         // logo配置
@@ -107,14 +104,14 @@ export default {
     }
     // 登录
     const authLoginSubmit = () => {
-      loginForm.value.validate(async(valid) => {
+      loginForm.value.validate(async (valid) => {
         if (valid) {
           const data = {
             act: 'ma_login',
             user_name: state.authLoginForm.username,
             pws: SHARETED_COMMON_MD5.hex_md5(
               PROJECT_COMMON.project_password_front_code +
-                state.authLoginForm.password.trim()
+              state.authLoginForm.password.trim()
             ),
             udid: guid(),
             type: 1 // 登录页登录标识
@@ -122,7 +119,7 @@ export default {
           // 调用登录方法
           const res = await store.dispatch('user/loginCaps', data)
           if (res.code === 0) {
-            
+
           }
         }
       })
@@ -137,5 +134,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/common/scss/admin/auth.scss';
+@import "@/common/scss/admin/auth.scss";
 </style>

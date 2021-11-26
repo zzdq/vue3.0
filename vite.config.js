@@ -32,7 +32,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 3000,
-    strictPort: true, // 设为 true 时若端口已被占用则会直接退出，而不是尝试下一个可用端口。
+    strictPort: false, // 设为 true 时若端口已被占用则会直接退出，而不是尝试下一个可用端口。
     proxy: {
       '/api': {
         target: 'https://web.deerttgx.com',
@@ -41,7 +41,7 @@ export default defineConfig({
       }
     }
   },
-  css:{
+  css: {
     preprocessorOptions: {
       scss: {
         additionalData: ``//引用公共样式，使用vite搭建项目只安装sass即可，不需要安装node-sass,sass-loader
