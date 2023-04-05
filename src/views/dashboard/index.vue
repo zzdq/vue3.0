@@ -6,35 +6,23 @@
   </el-container>
 </template>
 
-<script>
+<script setup>
 // getCurrentInstance 获取当前实例
 import { getCurrentInstance, ref, reactive, onMounted, computed } from 'vue'
 import topBar from '@/components/topBar.vue'
 
-export default {
-  components: {
-    topBar
-  },
-  setup () {
-    let count = ref(0)
-    const object = reactive({ obj: 1 })
+let count = ref(0)
+const object = reactive({ obj: 1 })
 
-    const plusOne = computed(() => object.obj + +Math.random().toFixed(1))
+const plusOne = computed(() => object.obj + +Math.random().toFixed(1))
 
-    const { proxy, ctx } = getCurrentInstance()
-    console.log(proxy, ctx);
-    onMounted(() => {
-      setInterval(() => {
-        object.obj++
-      }, 1000);
-    })
-    return {
-      count,
-      object,
-      plusOne
-    }
-  }
-}
+const { proxy, ctx } = getCurrentInstance()
+console.log(proxy, ctx);
+onMounted(() => {
+  setInterval(() => {
+    object.obj++
+  }, 1000);
+})
 </script>
 
 <style scoped>

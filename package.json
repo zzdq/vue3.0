@@ -8,12 +8,12 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "element-plus": "^1.0.2-beta.44",
+    "element-plus": "^1.0.2-beta.71",
     "normalize.css": "7.0.0",
     "sass-loader": "^11.1.1",
-    "vue": "^3.0.5",
-    "vue-router": "^4.0.4",
-    "vuex": "^4.0.0",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0",
     "websocket-heartbeat-js": "^1.0.13"
   },
   "devDependencies": {

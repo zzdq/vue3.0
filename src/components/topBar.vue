@@ -4,19 +4,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { defineProps } from 'vue'
 
-export default {
-  props: {
-    count: {
-      type: [Number, String],
-      default: ''
-    }
-  },
-  setup () {
-
+defineProps({
+  count: {
+    type: [Number, String],
+    default: ''
   }
-}
+})
 </script>
 
 <style scoped>
